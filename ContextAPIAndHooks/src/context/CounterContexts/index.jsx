@@ -1,7 +1,8 @@
 import P from 'prop-types';
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useReducer, useRef } from 'react';
+import { buildActions } from './build-actions';
+import { reducer } from './reducer';
 
-// eslint-disable-next-line react-refresh/only-export-components
 export const initialState = {
   counter: 0,
   loading: false,
@@ -10,10 +11,13 @@ export const initialState = {
 const Context = createContext();
 
 export const CounterContextProvider = ({ children }) => {
-  const [state, dispatch] = useState(initialState);
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const actions = useRef(buildActions(dispatch));
 
   return (
-    <Context.Provider value={[state, dispatch]}>{children}</Context.Provider>
+    <Context.Provider value={[state, actions.current]}>
+      {children}
+    </Context.Provider>
   );
 };
 
@@ -21,7 +25,6 @@ CounterContextProvider.propTypes = {
   children: P.node.isRequired,
 };
 
-// eslint-disable-next-line react-refresh/only-export-components
 export const useCounterContext = () => {
   const context = useContext(Context);
 

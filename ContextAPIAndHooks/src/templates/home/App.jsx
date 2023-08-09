@@ -1,10 +1,17 @@
+import { useEffect } from 'react';
 import viteLogo from '../../../public/vite.svg';
 import reactLogo from '../../assets/react.svg';
-import { useCounterContext } from '../../context/CounterContexts';
+import { useCounterContext } from '../../context/CounterContexts/index';
 import './App.css';
 
 function App() {
-  const [state, dispatch] = useCounterContext;
+  const [state, actions] = useCounterContext;
+  console.log(state);
+
+  useEffect(() => {
+    actions.increase();
+  }, [actions]);
+
   return (
     <>
       <div>
@@ -18,7 +25,7 @@ function App() {
       <h1>React - Context API + Hooks</h1>
       <div className="card">
         <h2>Olá</h2>
-        <button>+</button>
+        <button onClick={() => actions.increase()}>+</button>
       </div>
     </>
   );
