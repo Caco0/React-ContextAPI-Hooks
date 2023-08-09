@@ -1,8 +1,10 @@
 import viteLogo from '../../../public/vite.svg';
 import reactLogo from '../../assets/react.svg';
+import { useCounterContext } from '../../context/CounterContexts';
 import './App.css';
 
 function App() {
+  const [state, dispatch] = useCounterContext;
   return (
     <>
       <div>
@@ -16,6 +18,7 @@ function App() {
       <h1>React - Context API + Hooks</h1>
       <div className="card">
         <h2>Olá</h2>
+        <button>+</button>
       </div>
     </>
   );
