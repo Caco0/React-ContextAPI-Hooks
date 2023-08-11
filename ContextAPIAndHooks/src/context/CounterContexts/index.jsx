@@ -33,6 +33,5 @@ export const useCounterContext = () => {
       'You have to use useCounterContext inside <CounterContextProvider />'
     );
   }
-
   return [...context];
 };

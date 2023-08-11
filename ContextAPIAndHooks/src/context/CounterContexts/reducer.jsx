@@ -12,7 +12,7 @@ export const reducer = (state, action) => {
     case actionTypes.RESET:
       return { ...initialState };
     case actionTypes.SET_COUNTER:
-      return { ...state, ...action.payload };
+      return { ...state, ...action.payLoad };
     case actionTypes.ASYNC_INCREASE_START:
       return { ...state, loading: true };
     case actionTypes.ASYNC_INCREASE_END:
